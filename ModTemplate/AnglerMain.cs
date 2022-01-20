@@ -28,7 +28,6 @@ namespace AnglerMain
             inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAudioController>("UpdateLoopingAudio", typeof(AnglerMain), "looper");
             inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishController>("RotateTowardsTarget", typeof(AnglerMain), "Angle");
             inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAnimController>("OnChangeAnglerState", typeof(AnglerMain), "mover");
-            inst.ModHelper.Console.WriteLine("haha funny mod");
 
             LoadManager.OnCompleteSceneLoad += (scene, loadScene) =>
             {
