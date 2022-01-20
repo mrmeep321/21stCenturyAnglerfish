@@ -29,6 +29,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModTemplate.csproj.user" />
+    <Content Include="AnglerMain.user" />
   </ItemGroup>
 </Project>

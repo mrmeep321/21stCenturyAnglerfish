@@ -3,85 +3,42 @@ using OWML.Common;
 using UnityEngine;
 using Harmony;
 
-namespace ModTemplate
+namespace AnglerMain
 {
-    public sealed class ModTemplate : ModBehaviour
+    public sealed class AnglerMain : ModBehaviour
     {
-        public static ModTemplate inst;
+        public static AnglerMain inst;
 
-        public ModTemplate() : base()
+        public AnglerMain() : base()
         {
             inst = this;
         }
 
-        /*
-         * 
-         */
-
         public static AudioSource src;
 
-        //public static AudioClip clip = behave.ModHelper.Assets.LoadAudio("boom.wav").Asset.clip;
-
-        //public static ModBehaviour behave = ModTemplate.
-
-        //public static ModTemplate superInst = new ModTemplate();
-
         private void Awake()
-        {
-            // You won't be able to access OWML's mod helper in Awake.
-            // So you probably don't want to do anything here.
-            // Use Start() instead.
-        }
+        {}
 
         private void Start()
         {
-            // Starting here, you'll have access to OWML's mod helper.
-            inst.ModHelper.Console.WriteLine($"My mod {nameof(ModTemplate)} is loaded!", MessageType.Success);
+            inst.ModHelper.Console.WriteLine($"My mod {nameof(AnglerMain)} is loaded!", MessageType.Success);
 
-            inst.ModHelper.Events.Subscribe<Flashlight>(Events.AfterStart);
-            inst.ModHelper.Events.OnEvent += OnEvent;
-
-            inst.ModHelper.Console.WriteLine("2", MessageType.Success);
-
-            inst.ModHelper.Console.WriteLine("3", MessageType.Success);
-
-            inst.ModHelper.HarmonyHelper.AddPrefix<BlackHoleVolume>("Awake", typeof(ModTemplate), "blackHolePatch");
-            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishController>("MoveTowardsTarget", typeof(ModTemplate), "move");
-            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAudioController>("OnChangeAnglerState", typeof(ModTemplate), "Sound");
-            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAudioController>("UpdateLoopingAudio", typeof(ModTemplate), "looper");
-            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishController>("RotateTowardsTarget", typeof(ModTemplate), "Angle");
-            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAnimController>("OnChangeAnglerState", typeof(ModTemplate), "mover");
+            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishController>("MoveTowardsTarget", typeof(AnglerMain), "move");
+            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAudioController>("OnChangeAnglerState", typeof(AnglerMain), "Sound");
+            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAudioController>("UpdateLoopingAudio", typeof(AnglerMain), "looper");
+            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishController>("RotateTowardsTarget", typeof(AnglerMain), "Angle");
+            inst.ModHelper.HarmonyHelper.AddPrefix<AnglerfishAnimController>("OnChangeAnglerState", typeof(AnglerMain), "mover");
             inst.ModHelper.Console.WriteLine("haha funny mod");
 
-            // Example of accessing game code.
             LoadManager.OnCompleteSceneLoad += (scene, loadScene) =>
             {
                 if (loadScene != OWScene.SolarSystem) return;
                 var playerBody = FindObjectOfType<PlayerBody>();
-                base.ModHelper.Console.WriteLine($"Found player body, and it's called {playerBody.name}!", MessageType.Success);
-
                 GameObject gameObject = FindObjectOfType<PlayerBody>().gameObject;
                 src = gameObject.AddComponent<AudioSource>();
-                src.clip = inst.ModHelper.Assets.LoadAudio("boom.wav").Asset.clip;
+                src.clip = inst.ModHelper.Assets.LoadAudio("Assets/boom.wav").Asset.clip;
                 src.volume = 0.2f;
             };
-        }
-
-        private void OnEvent(MonoBehaviour behavior, Events ev)
-        {
-            base.ModHelper.Console.WriteLine("behavior name: " + behavior.name);
-
-            if(behavior.GetType() == typeof(Flashlight) && ev == Events.AfterStart)
-            {
-                base.ModHelper.Console.WriteLine("Flashlight has started!");
-            }
-        }
-
-        public static bool blackHolePatch(BlackHoleVolume __instance)
-        {
-            inst.ModHelper.Console.WriteLine("Detected and deleted black hole");
-            UnityEngine.Object.Destroy(__instance.gameObject);
-            return false;
         }
 
         public static bool Angle(AnglerfishController __instance, ref Vector3 targetPos, ref float normalTurnSpeed, ref float inPlaceTurnSpeed)

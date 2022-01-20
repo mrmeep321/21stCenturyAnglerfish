@@ -1,8 +1,8 @@
 {
-  "filename": "ModTemplate.dll",
+  "filename": "21Angler.dll",
   "author": "mrmeep321",
-  "name": "Eye Mod",
-  "uniqueName": "mrmeep321.Eye Mod",
-  "version": "0.1.0",
+  "name": "21st Century Anglerfish",
+  "uniqueName": "mrmeep321.Angler",
+  "version": "1.0.0",
   "owmlVersion": "2.0.0"
 }
