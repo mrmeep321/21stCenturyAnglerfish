@@ -6,6 +6,6 @@ It's built to make the anglerfish a little less intimidating (though for some, i
 
 Anglerfish will no longer chase you, but instead when they hear you, they'll just look and stare after making a vine boom sound effect, and then continue staring until you leave.
 
-Release V1.0.0: https://github.com/mrmeep321/21stCenturyAnglerfish/releases/tag/v1.0.0
+Release V1.1.0: https://github.com/mrmeep321/21stCenturyAnglerfish/releases/tag/v1.1.0
 
 <!-- TOC -->
